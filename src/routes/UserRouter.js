@@ -9,6 +9,7 @@ const UserRouter = (app) => {
   router.post("/sign-up", UserController.createUser);
   router.post("/login", UserController.loginUser);
   router.put("/update-user/:id", authUserMiddleware, UserController.updateUser);
+  router.delete("/delete-user/:id", authMiddleware, UserController.deleteUser);
   return app.use("/api/user", router);
 };
 
