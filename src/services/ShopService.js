@@ -19,6 +19,23 @@ const createNameShop = (name) => {
   });
 };
 
+const getAllShop = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const shop = await Shop.find().sort({ createdAt: -1 });
+      if (shop) {
+        resolve({
+          status: "Ok",
+          message: "get all success!!",
+          data: shop,
+        });
+      }
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 module.exports = {
   createNameShop,
+  getAllShop,
 };
