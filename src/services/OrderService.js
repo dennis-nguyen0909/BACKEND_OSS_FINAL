@@ -268,6 +268,26 @@ const cancelOrderProduct = (id, data) => {
     }
   });
 };
+const deleteManyOrder = (ids) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      await Order.deleteMany({
+        _id: { $in: ids },
+      });
+      resolve({
+        status: "Ok",
+        EC: 1,
+        Message: "Delete Success",
+      });
+    } catch (error) {
+      resolve({
+        status: "Error",
+        EC: 0,
+        Message: "Delete Error",
+      });
+    }
+  });
+};
 module.exports = {
   getAllOrderDetailsByMonth,
   createOrder,
@@ -276,4 +296,5 @@ module.exports = {
   getAllType,
   getDetailOrder,
   cancelOrderProduct,
+  deleteManyOrder,
 };
