@@ -37,7 +37,26 @@ const createProduct = async (req, res) => {
     });
   }
 };
-
+const updateProduct = async (req, res) => {
+  try {
+    const idProduct = req.params.id;
+    const data = req.body;
+    if (!idProduct) {
+      return res.status(404).json({
+        status: "Error",
+        message: "Vui lòng chọn id",
+      });
+    }
+    const response = await ProductService.updateProduct(idProduct, data);
+    return res.status(200).json(response);
+  } catch (error) {
+    return res.status(404).json({
+      status: "Lỗi phía controller",
+      message: error,
+    });
+  }
+};
 module.exports = {
   createProduct,
+  updateProduct,
 };
