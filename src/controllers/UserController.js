@@ -196,6 +196,19 @@ const logoutUser = async (req, res) => {
     });
   }
 };
+const chatGPT = async (req, res) => {
+  try {
+    const data = req.body.message;
+    const response = await UserService.chatGPT(data);
+    return res.status(200).json({ response });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({
+      message: "Lỗi từ services",
+      status: "Error",
+    });
+  }
+};
 
 module.exports = {
   createUser,
@@ -207,4 +220,5 @@ module.exports = {
   deleteManyUser,
   refreshToken,
   logoutUser,
+  chatGPT,
 };
