@@ -109,6 +109,30 @@ const updateProduct = (id, data) => {
     }
   });
 };
+const deleteProduct = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const checkIdProduct = await Product.findOne({
+        _id: id,
+      });
+      if (checkIdProduct === null) {
+        resolve({
+          status: "Error",
+          message: "Sản phẩm không tồn tại",
+        });
+      }
+      await Product.findByIdAndDelete(id);
+      return resolve({
+        status: "Ok",
+        message: "Delete Product Successfully!!",
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 module.exports = {
   createProduct,
+  updateProduct,
+  deleteProduct,
 };

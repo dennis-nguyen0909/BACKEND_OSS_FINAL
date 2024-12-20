@@ -56,7 +56,29 @@ const updateProduct = async (req, res) => {
     });
   }
 };
+const deleteProduct = async (req, res) => {
+  try {
+    const idProduct = req.params.id;
+    if (!idProduct) {
+      return res.status(404).json({
+        status: "error",
+        message: "Vui lòng chọn id",
+      });
+    }
+    const response = await ProductService.deleteProduct(idProduct);
+    return res.status(200).json({
+      message: "Ok",
+      data: response,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      status: "error",
+      message: "Lỗi từ controller",
+    });
+  }
+};
 module.exports = {
   createProduct,
   updateProduct,
+  deleteProduct,
 };
