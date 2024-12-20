@@ -174,6 +174,18 @@ const confirmOrder = async (req, res) => {
     });
   }
 };
+const getRevenueByMonth = async (req, res) => {
+  try {
+    const response = await OrderService.getRevenueByMonth();
+    return res.status(200).json({ response });
+  } catch (error) {
+    console.log(error);
+    return res.status(404).json({
+      message: "Lỗi từ services",
+      status: "Error",
+    });
+  }
+};
 module.exports = {
   getAllOrderDetailsByMonth,
   createOrder,
@@ -184,4 +196,5 @@ module.exports = {
   cancelOrderProduct,
   deleteManyOrder,
   confirmOrder,
+  getRevenueByMonth,
 };
