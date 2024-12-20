@@ -98,10 +98,32 @@ const getAllType = async (req, res) => {
     });
   }
 };
+const getDetailOrder = async (req, res) => {
+  try {
+    const id = req.params.id;
+    if (!id) {
+      return res.status(200).json({
+        EC: 0,
+        EM: "ERR",
+      });
+    }
+    const response = await OrderService.getDetailOrder(id);
+    return res.status(200).json({
+      EC: 1,
+      EM: "SUCCESS",
+      response,
+    });
+  } catch (error) {
+    return res.status(404).json({
+      message: error,
+    });
+  }
+};
 module.exports = {
   getAllOrderDetailsByMonth,
   createOrder,
   getAllOder,
   getAllOrderDetails,
   getAllType,
+  getDetailOrder,
 };
