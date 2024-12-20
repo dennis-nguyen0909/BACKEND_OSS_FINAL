@@ -25,8 +25,20 @@ const getAllShop = async (req, res) => {
     });
   }
 };
+const getShopById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const response = await ShopService.getShopById(id);
+    return res.status(200).json({ response });
+  } catch (e) {
+    return res.status(500).json({
+      EM: "Error",
+    });
+  }
+};
 
 module.exports = {
   createNameShop,
   getAllShop,
+  getShopById,
 };
