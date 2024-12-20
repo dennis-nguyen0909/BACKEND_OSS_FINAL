@@ -286,6 +286,23 @@ const getAllTypeProduct = () => {
     }
   });
 };
+const getAllDiscount = () => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const productsWithDiscount = await Product.find({
+        discount: { $exists: true },
+      });
+      resolve({
+        status: "Ok",
+        EC: 1,
+        message: "Get all discount successfully!!",
+        data: productsWithDiscount,
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 module.exports = {
   createProduct,
   updateProduct,
@@ -295,4 +312,5 @@ module.exports = {
   getAllProduct2,
   deleteManyProduct,
   getAllTypeProduct,
+  getAllDiscount,
 };
