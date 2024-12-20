@@ -148,14 +148,25 @@ const cancelOrderProduct = async (req, res) => {
   try {
     const id = req.params.id;
     const data = req.body;
+
+    // Kiểm tra xem id có rỗng không
+    if (!id || id.trim() === "") {
+      return res
+        .status(400)
+        .json({ message: "Invalid order ID. ID cannot be empty." });
+    }
+
+    // Tiến hành hủy đơn hàng
     const response = await OrderService.cancelOrderProduct(id, data);
+
     return res.status(200).json(response);
   } catch (error) {
-    return res.status(404).json({
-      message: error,
+    return res.status(500).json({
+      message: "Server error. Please try again later.",
     });
   }
 };
+
 const deleteManyOrder = async (req, res) => {
   try {
     const ids = req.body.ids;
