@@ -15,6 +15,7 @@ const ProductRouter = (app) => {
     authMiddleware,
     ProductController.deleteManyProduct
   );
+  router.get("/get-all-type", ProductController.getAllTypeProduct);
   return app.use("/api/product", router);
 };
 
