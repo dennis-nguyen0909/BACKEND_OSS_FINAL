@@ -131,8 +131,31 @@ const deleteProduct = (id) => {
     }
   });
 };
+const getDetailProduct = (id) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const product = await Product.findOne({
+        _id: id,
+      });
+      if (product === null) {
+        resolve({
+          status: "Error",
+          message: "Sản phẩm không tồn tại",
+        });
+      }
+      resolve({
+        status: "Ok",
+        message: "Đã tìm thấy sản phẩm!!",
+        data: product,
+      });
+    } catch (error) {
+      reject(error);
+    }
+  });
+};
 module.exports = {
   createProduct,
   updateProduct,
   deleteProduct,
+  getDetailProduct,
 };
